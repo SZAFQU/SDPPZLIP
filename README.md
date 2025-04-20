@@ -1,77 +1,125 @@
-# SDPPZLIP - Skrypt do pobierania plików z listy i podpisywania
+SDPPZLIP - Skrypt PowerShell do pobierania plików z listy i organizowania w folderach
 
-![PowerShell](https://img.shields.io/badge/PowerShell-7.1+-blue.svg)  
-![Windows](https://img.shields.io/badge/Windows-11%20|%20Server%202022-supported-green.svg)  
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## 📝 Opis
 
-Zaawansowany skrypt PowerShell do pobierania plików z listy URL-i, organizujący je w folderach według sezonów z pełną obsługą logowania błędów i śledzeniem postępu.
 
-## ✨ Funkcje
 
-- 📂 Pobieranie plików z listy URL-i
-- 🗂 Automatyczne organizowanie w folderach "Sezon X"
-- 📝 Logowanie błędów i operacji
-- ⏱ Konfigurowalny timeout połączeń
-- 🔍 Weryfikacja URL przed pobraniem
-- 🚀 Optymalizacja dla PowerShell 7.1+ i Windows 11
-- 📊 Śledzenie postępu i statystyki
-- ♻️ Automatyczne wznawianie pobierania na podstawie `ukonczone.txt`
-- ⛔ Obsługa zatrzymywania (`Ctrl + C`) z zachowaniem postępu
-- ⚙️ Parametr `-Force` do wymuszenia ponownego pobrania
 
-## 📦 Wymagania
+---
 
-- PowerShell 7.1 lub nowszy
-- Windows 10/11 lub Windows Server 2019/2022
-- Dostęp do internetu (dla pobierania plików)
+📝 Opis
 
-## 🛠 Instalacja
+SDPPZLIP.ps1 to zaawansowany skrypt PowerShell służący do pobierania plików z listy URL-i. Automatycznie organizuje pobrane pliki w sezonowych folderach, śledzi postęp i umożliwia wznowienie pobierania. Idealny do zarządzania dużymi zbiorami multimediów.
 
-1. Pobierz plik skryptu: `SDPPZLIP.ps1`
-2. Zapisz w wybranym folderze
-3. Odblokuj plik:
-   ```powershell
-   Unblock-File -Path .\SDPPZLIP.ps1
+
+---
+
+✨ Główne funkcje
+
+📥 Pobieranie plików z listy URL-i (format: Nazwa|Link lub dwuliniowy)
+
+📁 Automatyczne tworzenie folderów w formacie Sezon XX
+
+⚙️ Parametryzacja działania (limit, timeout, plik wejściowy/wyjściowy)
+
+♻️ Wznawianie pobierania z zachowaniem stanu (ukonczone.txt)
+
+⏱ Weryfikacja dostępności URL metodą HEAD
+
+✅ Obsługa -Force, -PominWeryfikacje, -Help
+
+✏️ Logowanie błędów do bledy.log
+
+✨ Kolorowe komunikaty statusowe
+
+⛔ Obsługa zatrzymania (Ctrl + C) bez utraty postępu
+
+
+
+---
+
+⚙️ Wymagania
+
+PowerShell 7.1 lub nowszy
+
+System Windows 10, 11 lub Server 2019/2022
+
+Połączenie z internetem
+
+
+
+---
+
+🛠 Instalacja
+
+1. Pobierz plik SDPPZLIP.ps1
+
+
+2. Zapisz w dowolnym folderze
+
+
+3. Odblokuj:
+
+Unblock-File -Path .\SDPPZLIP.ps1
+
+
+
+
+---
 
 🚀 Użycie
 
-Podstawowe:
+Tryb podstawowy:
 
 .\SDPPZLIP.ps1
 
-Zaawansowane:
+Tryb zaawansowany:
 
-.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "MojePliki" -Timeout 60 -LimitPobierania 10 -Force -PominWeryfikacje
+.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "Wynik" -LimitPobierania 20 -Timeout 60 -Force
 
 Pomoc:
 
 .\SDPPZLIP.ps1 -Help
 
-📌 Przykładowy plik z listą
 
-Film 1|https://...mp4
-Film 2|https://...mp4
-# komentarz
-Film 3
-https://...mp4
+---
+
+📌 Format listy
+
+Plik lista.txt powinien wyglądać tak:
+
+Film 1|https://adres.pl/plik1.mp4
+Film 2
+https://adres.pl/plik2.mp4
+# komentarze są ignorowane
+
+
+---
 
 ⚙️ Parametry
 
+
+---
+
 ⏸️ Pauzowanie i wznawianie
 
-Ctrl + C zatrzymuje pobieranie
+Możesz zatrzymać pobieranie (Ctrl + C)
 
-Ponowne uruchomienie wznawia od miejsca przerwania
+Wznowienie nastąpi przy ponownym uruchomieniu
 
--Force wymusza ponowne pobranie
+Pliki już pobrane nie zostaną pobrane ponownie (chyba że dodasz -Force)
 
+
+
+---
 
 📄 Licencja
 
-MIT License - LICENSE
+Ten projekt objęty jest licencją MIT. Szczegóły w pliku LICENSE.
+
+
+---
 
 👨‍💻 Autor
 
-SZAFQU
+SZAFQU – pasjonat PowerShella i automatyzacji.
