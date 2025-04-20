@@ -161,10 +161,7 @@ PS C:\Pobrane\Skrypty> .\SDPPZLIP.ps1 -PlikZListy "seriale.txt" -Timeout 120
 Pobrano: Odcinek_1.mp4
 
 
-
 ## 💡 **Dodatkowe wskazówki**
 1. Dla dużych plików zwiększ parametr `-Timeout` (np. do 300 sekund)
 2. Użyj `-Force`, aby nadpisać istniejące pliki
 3. Monitoruj postęp w plikach `bledy.log` i `ukonczone.txt`
-
-
