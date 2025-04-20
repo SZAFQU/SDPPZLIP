@@ -1,4 +1,4 @@
-# SDPZLIP - Skrypt do pobierania plików z listy
+# SDPPZLIP - Skrypt do pobierania plików z listy 
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-7.1+-blue.svg)
 ![Windows](https://img.shields.io/badge/Windows-11%20|%20Server%202022-supported-green.svg)
@@ -16,7 +16,10 @@ Zaawansowany skrypt PowerShell do pobierania plików z listy URL-i, organizując
 - ⏱ Konfigurowalny timeout połączeń
 - 🔍 Weryfikacja URL przed pobraniem
 - 🚀 Optymalizacja dla PowerShell 7.1+ i Windows 11
-- 📊 Śledzenie postępu i statystyki
+- 📊 Śledzenie postępu i statystyki|
+- ♻️ Automatyczne wznawianie pobierania na podstawie `ukonczone.txt`
+- ⛔ Obsługa zatrzymywania (`Ctrl + C`) z zachowaniem postępu
+- ⚙️ Parametr `-Force` do wymuszenia ponownego pobrania
 
 ## 📦 Wymagania
 
@@ -39,7 +42,7 @@ Zaawansowany skrypt PowerShell do pobierania plików z listy URL-i, organizując
 
 ### Zaawansowane opcje:
 
-.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "MojePliki" -Timeout 60 -LimitPobierania 10
+.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "MojePliki" -Timeout 60 -LimitPobierania 10 -Force -Pominweryfikacje
 
 
 ### Wyświetlenie pomocy:
@@ -48,10 +51,10 @@ Zaawansowany skrypt PowerShell do pobierania plików z listy URL-i, organizując
 
 ## 📌 Przykładowy plik z listą
 
-Nazwa pliku 1|https://example.com/file1.mp4
-Nazwa pliku 2|https://example.com/file2.mp4
-# To jest komentarz - zostanie pominięty
-Nazwa pliku 3
+Nazwa pliku 1|https://example.com/file1.mp4  
+Nazwa pliku 2|https://example.com/file2.mp4  
+# To jest komentarz - zostanie pominięty  
+Nazwa pliku 3  
 https://example.com/file3.mp4
 
 ## ⚙️ Parametry
@@ -67,6 +70,14 @@ https://example.com/file3.mp4
 | `-PominWeryfikacje`| Pomija weryfikację URL                | `$false`      |
 | `-Force`           | Wymusza wykonanie (nadpisuje pliki)   | `$false`      |
 | `-Help`            | Wyświetla pomoc                       | `$false`      |
+
+## ⏸️ Pauzowanie i wznawianie
+
+Skrypt automatycznie pomija pliki zapisane wcześniej w `ukonczone.txt`, dzięki czemu możesz:
+
+- **Zatrzymać pobieranie** w dowolnym momencie (`Ctrl + C`)
+- **Wznowić** uruchamiając skrypt ponownie – kontynuacja nastąpi automatycznie
+- **Wymusić pobranie ponownie** dodając parametr `-Force`
 
 ## 📄 Licencja
 
@@ -116,7 +127,7 @@ Skrypt użyje domyślnych ustawień:
 
 ### 6. **Zaawansowane uruchomienie z parametrami**
 Przykład z własnymi ustawieniami:
-.\SDPPZLIP.ps1 -PlikZListy "moje_url.txt" -GlownyFolder "Filmy" -Timeout 60 -LimitPobierania 5
+.\SDPPZLIP.ps1 -PlikZListy "moje_url.txt" -GlownyFolder "Filmy" -Timeout 60 -LimitPobierania 0
 
 
 ### 7. **Pomoc techniczna**
