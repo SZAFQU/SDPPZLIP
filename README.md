@@ -90,15 +90,18 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 > 💡 *To pozwoli uruchamiać lokalne skrypty (wymagane tylko raz)*
 
+
 ### 2. **Otwórz terminal PowerShell 7**
 - Naciśnij `Win + R`
 - Wpisz `pwsh` i kliknij OK
 - Lub użyj **Windows Terminal** (zalecane)
 
+
 ### 3. **Przejdź do folderu ze skryptem**
 cd C:\ścieżka\do\folderu\ze\skryptem
 
 🔍 *Sprawdź zawartość folderu komendą  dir
+
 
 ### 4. **Odblokuj skrypt (tylko przy pierwszym uruchomieniu)**
 Unblock-File -Path .\SDPPZLIP.ps1
@@ -110,6 +113,7 @@ Skrypt użyje domyślnych ustawień:
 - Szuka pliku `lista.txt`
 - Zapisuje pliki w folderze `Pobrane`
 
+
 ### 6. **Zaawansowane uruchomienie z parametrami**
 Przykład z własnymi ustawieniami:
 .\SDPPZLIP.ps1 -PlikZListy "moje_url.txt" -GlownyFolder "Filmy" -Timeout 60 -LimitPobierania 5
@@ -118,6 +122,7 @@ Przykład z własnymi ustawieniami:
 ### 7. **Pomoc techniczna**
 Aby wyświetlić wszystkie opcje:
 .\SDPPZLIP.ps1 -Help
+
 
 
 ## 🛠 **Rozwiązywanie problemów**
