@@ -3,9 +3,6 @@ SDPPZLIP - Skrypt do pobierania plików z listy i organizowania w folderach
 📝 Opis
 SDPPZLIP.ps1 to zaawansowany skrypt PowerShell do pobierania plików z listy URL-i. Automatycznie organizuje pliki w folderach „Sezon X” na podstawie numeru sezonu podanego w nazwie pliku (np. S1, S2) lub zapisuje je bezpośrednio w folderze głównym, jeśli użyto opcji -BezSezonow. Śledzi postęp pobierania, loguje błędy i umożliwia wznawianie.
 
-
-
-
 ✨ Główne funkcje
 
 📥 Pobieranie plików z listy URL-i w formacie Nazwa|Link lub dwuliniowym
