@@ -1,12 +1,12 @@
 SDPPZLIP - Skrypt Do Pobierania Plików Z Listy I Podpisywaniem
 
 📝 Opis
-SDPPZLIP.ps1 to zaawansowany skrypt PowerShell do pobierania plików z listy URL-i. Automatycznie organizuje pliki w folderach „Sezon X” (np. Sezon 1, Sezon 2), śledzi postęp pobierania i umożliwia jego wznawianie. Idealny do zarządzania dużymi zbiorami multimediów, takich jak filmy czy podcasty.
+SDPPZLIP.ps1 to zaawansowany skrypt PowerShell do pobierania plików z listy URL-i. Automatycznie organizuje pliki w folderach „Sezon X” na podstawie numeru sezonu podanego w nazwie pliku (np. S1, S2), śledzi postęp pobierania i umożliwia jego wznawianie. Idealny do zarządzania dużymi zbiorami multimediów, takich jak filmy czy podcasty.
 
 ✨ Główne funkcje
 
 📥 Pobieranie plików z listy URL-i w formacie Nazwa|Link lub dwuliniowym
-📁 Automatyczne tworzenie folderów w formacie „Sezon X” (np. Sezon 1)
+📁 Automatyczne tworzenie folderów w formacie „Sezon X” na podstawie sezonu w nazwie pliku (np. S1 →/ S2 itd.)
 ⚙️ Elastyczna konfiguracja poprzez parametry (limit pobierania, timeout, pliki wejściowe/wyjściowe)
 ♻️ Wznawianie pobierania dzięki śledzeniu stanu w pliku ukonczone.txt
 ⏱ Weryfikacja dostępności URL-i metodą HEAD
@@ -26,8 +26,11 @@ Połączenie z internetem
 🛠 Instalacja
 
 Pobierz plik SDPPZLIP.ps1 z repozytorium.
+
 Zapisz go w wybranym folderze.
-Odblokuj skrypt, aby umożliwić jego uruchomienie:Unblock-File -Path .\SDPPZLIP.ps1
+
+Odblokuj skrypt, aby umożliwić jego uruchomienie:
+Unblock-File -Path .\SDPPZLIP.ps1
 
 
 
@@ -49,17 +52,18 @@ Sprawdź dostępne opcje:
 📌 Format listy
 Plik lista.txt powinien zawierać pary nazwa-URL w jednym z dwóch formatów:
 Format z separatorem |
-Film 1|https://przyklad.pl/plik1.mp4
-Film 2|https://przyklad.pl/plik2.mp4
+S1.E01.Nazwa|https://przyklad.pl/plik1.mp4
+S2.E01.Nazwa|https://przyklad.pl/plik2.mp4
 
 Format dwuliniowy
-Film 1
+S1.E01.Nazwa
 https://przyklad.pl/plik1.mp4
-Film 2
+S2.E01.Nazwa
 https://przyklad.pl/plik2.mp4
 
 Uwagi:
 
+Nazwa pliku powinna zaczynać się od S<NumerSezonu> (np. S1, S2), aby poprawnie rozpoznać sezon.
 Komentarze zaczynające się od # są ignorowane.
 Nazwy plików są automatycznie oczyszczane z niedozwolonych znaków.
 
@@ -116,7 +120,7 @@ SZAFQU
 
 📋 Uwagi
 
-Skrypt automatycznie tworzy foldery w formacie „Sezon X” (np. Sezon 1, Sezon 2) na podstawie liczby plików (10 plików na sezon).
-W przypadku błędów pobierania szczegóły zapisywane są w pliku błedy.log.
+Skrypt rozpoznaje numer sezonu z nazwy pliku (np. S1, S2) i tworzy foldery „Sezon 1”, „Sezon 2” itd.
+Jeśli nazwa pliku nie zawiera numeru sezonu, plik zostanie zapisany w folderze „Sezon 1” z ostrzeżeniem.
+W przypadku błędów pobierania szczegóły zapisywane są w pliku bledy.log.
 Aby uzyskać najlepsze rezultaty, upewnij się, że lista URL-i jest poprawna i dostępna.
-
