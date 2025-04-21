@@ -1,16 +1,20 @@
-SDPPZLIP - Skrypt Do Pobierania Plików Z Listy I Podpisywaniem
+SDPPZLIP - Skrypt do pobierania plików z listy i organizowania w folderach
 
 📝 Opis
-SDPPZLIP.ps1 to zaawansowany skrypt PowerShell do pobierania plików z listy URL-i. Automatycznie organizuje pliki w folderach „Sezon X” na podstawie numeru sezonu podanego w nazwie pliku (np. S1, S2), śledzi postęp pobierania i umożliwia jego wznawianie. Idealny do zarządzania dużymi zbiorami multimediów, takich jak filmy czy podcasty.
+SDPPZLIP.ps1 to zaawansowany skrypt PowerShell do pobierania plików z listy URL-i. Automatycznie organizuje pliki w folderach „Sezon X” na podstawie numeru sezonu podanego w nazwie pliku (np. S1, S2) lub zapisuje je bezpośrednio w folderze głównym, jeśli użyto opcji -BezSezonow. Śledzi postęp pobierania, loguje błędy i umożliwia wznawianie.
 
 ✨ Główne funkcje
 
 📥 Pobieranie plików z listy URL-i w formacie Nazwa|Link lub dwuliniowym
-📁 Automatyczne tworzenie folderów w formacie „Sezon X” na podstawie sezonu w nazwie pliku (np. S1 →/ S2 itd.)
-⚙️ Elastyczna konfiguracja poprzez parametry (limit pobierania, timeout, pliki wejściowe/wyjściowe)
-♻️ Wznawianie pobierania dzięki śledzeniu stanu w pliku ukonczone.txt
+📁 Elastyczna organizacja:
+Domyślnie: tworzy foldery „Sezon X” na podstawie sezonu w nazwie pliku (np. S1 → Sezon 1)
+Z opcją -BezSezonow: zapisuje pliki bezpośrednio w folderze głównym
+
+
+⚙️ Elastyczna konfiguracja poprzez parametry
+♻️ Wznawianie pobierania dzięki pliku ukonczone.txt
 ⏱ Weryfikacja dostępności URL-i metodą HEAD
-✅ Obsługa opcji -Force, -PominWeryfikacje, -Help
+✅ Obsługa opcji -Force, -PominWeryfikacje, -BezSezonow, -Help
 ✏️ Logowanie błędów do pliku bledy.log
 ✨ Kolorowe komunikaty statusowe w konsoli
 ⛔ Obsługa przerwania (Ctrl+C) z zachowaniem postępu
@@ -37,12 +41,16 @@ Unblock-File -Path .\SDPPZLIP.ps1
 
 🚀 Użycie
 Tryb podstawowy
-Uruchom skrypt z domyślnymi ustawieniami:
+Uruchom skrypt z domyślnymi ustawieniami (tworzy foldery Sezon X):
 .\SDPPZLIP.ps1
 
+Tryb bez folderów Sezon X
+Zapisz wszystkie pliki bezpośrednio w folderze głównym:
+.\SDPPZLIP.ps1 -BezSezonow
+
 Tryb zaawansowany
-Dostosuj parametry do swoich potrzeb:
-.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "Wynik" -LimitPobierania 20 -Timeout 60 -Force
+Dostosuj parametry:
+.\SDPPZLIP.ps1 -PlikZListy "moja_lista.txt" -GlownyFolder "Multimedia" -LimitPobierania 20 -Timeout 60 -Force -BezSezonow
 
 Wyświetlenie pomocy
 Sprawdź dostępne opcje:
@@ -63,13 +71,12 @@ https://przyklad.pl/plik2.mp4
 
 Uwagi:
 
-Nazwa pliku powinna zaczynać się od S<NumerSezonu> (np. S1, S2), aby poprawnie rozpoznać sezon.
+Nazwa pliku powinna zaczynać się od S<NumerSezonu> (np. S1, S2), jeśli używasz segregacji po sezonach.
 Komentarze zaczynające się od # są ignorowane.
 Nazwy plików są automatycznie oczyszczane z niedozwolonych znaków.
 
 
 ⚙️ Parametry
-
 
 
 Parametr
@@ -80,7 +87,7 @@ Opis
 Plik z listą URL-i (domyślnie: lista.txt)
 
 -GlownyFolder
-Główny folder docelowy (domyślnie: Pobrane)
+Główny folder docelowy (domyślnie: Multimedia w bieżącym katalogu)
 
 -PlikLogow
 Plik logów błędów (domyślnie: bledy.log)
@@ -100,6 +107,9 @@ Pomija weryfikację dostępności URL-i metodą HEAD
 -Force
 Wymusza ponowne pobranie wszystkich plików
 
+-BezSezonow
+Pomija tworzenie folderów Sezon X, zapisuje pliki w GlownyFolder
+
 -Help
 Wyświetla pomoc
 
@@ -109,7 +119,7 @@ Wyświetla pomoc
 
 Zatrzymanie: Naciśnij Ctrl+C, aby przerwać pobieranie. Postęp zostanie zapisany w pliku ukonczone.txt.
 Wznowienie: Uruchom skrypt ponownie, a pobieranie rozpocznie się od miejsca, w którym zostało przerwane.
-Ponowne pobieranie: Użyj opcji -Force, aby pobrać wszystkie pliki od nowa, ignorując stan w ukonczone.txt.
+Ponowne pobieranie: Użyj opcji -Force, aby pobrać wszystkie pliki od nowa.
 
 
 📄 Licencja
@@ -120,7 +130,10 @@ SZAFQU
 
 📋 Uwagi
 
-Skrypt rozpoznaje numer sezonu z nazwy pliku (np. S1, S2) i tworzy foldery „Sezon 1”, „Sezon 2” itd.
-Jeśli nazwa pliku nie zawiera numeru sezonu, plik zostanie zapisany w folderze „Sezon 1” z ostrzeżeniem.
+Skrypt domyślnie rozpoznaje numer sezonu z nazwy pliku (np. S1, S2) i tworzy foldery „Sezon 1”, „Sezon 2” itd., chyba że użyto opcji -BezSezonow.
+Z opcją -BezSezonow wszystkie pliki są zapisywane bezpośrednio w folderze określonym przez -GlownyFolder.
+Jeśli nazwa pliku nie zawiera numeru sezonu, plik zostanie zapisany w folderze „Sezon 1” z ostrzeżeniem (tylko bez -BezSezonow).
+Foldery są tworzone dynamicznie, bez hardkodowanych ścieżek.
+Konsola wyświetla tylko kluczowe informacje: nazwę pliku podczas pobierania i potwierdzenie ukończenia.
 W przypadku błędów pobierania szczegóły zapisywane są w pliku bledy.log.
-Aby uzyskać najlepsze rezultaty, upewnij się, że lista URL-i jest poprawna i dostępna.
+
